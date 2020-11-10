@@ -51,60 +51,7 @@ tic
 % lo_file_number = '0';
 
 %% Set Voltage 
-
-% Set Voltage Step
-
-set_volt_port = strcat('INST:SEL OUT',num2str(v_port));
-fprintf(VS_03, set_volt_port);
-
-set_volt_step = strcat('VOLT:STEP',{' '},num2str(v_step));
-set_volt_step = set_volt_step{1};
-fprintf(VS_03, set_volt_step);
-
-outp_stat = str2double(query(VS_03,'OUTP?'));
-
-if(outp_stat == 0)
-    fprintf(VS_03, 'VOLT 0');
-    fprintf(VS_03, 'OUTP ON');
-    while(str2double(query(VS_03,'VOLT?')) < v_target - v_tolerance)
-        pause(v_time_step)
-        if(str2double(query(VS_03,'VOLT?')) >= v_lim_up)
-            break;
-        end
-        fprintf(VS_03, 'VOLT UP');
-    end
-end
-
-if(inc)
-    
-if(outp_stat==1)
-    curr_volt = str2double(query(VS_03,'VOLT?'));
-    while(curr_volt < v_target - v_tolerance)
-        pause(v_time_step)
-        if(curr_volt >= v_lim_up)
-            break;
-        end
-        fprintf(VS_03, 'VOLT UP');
-        curr_volt = str2double(query(VS_03,'VOLT?'));
-    end
-end
-
-
-else
-    
-if(outp_stat==1)
-    curr_volt = str2double(query(VS_03,'VOLT?'));
-    while(curr_volt < v_target - v_tolerance)
-        pause(v_time_step)
-        if(curr_volt >= v_lim_btm)
-            break;
-        end
-        fprintf(VS_03, 'VOLT DOWN');
-        curr_volt = str2double(query(VS_03,'VOLT?'));
-    end
-end
-
-end
+Set_Voltage(VS_03, 1, v_target)
 
 %% Set Sweep Type
 

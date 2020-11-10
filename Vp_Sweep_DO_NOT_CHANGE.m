@@ -2,15 +2,7 @@ close all
 clear all
 clc
 
-%% Construct visa object
-
-% Tool Name                  GPIB#
-% NG-VS-03                    1
-% NG-NA-03                    16
-
-%% Create VISA Objects
-VNA = visa('ni', 'GPIB0::16::INSTR');
-VS_03 = visa('ni','GPIB0::1::INSTR');
+OpenInstruments
 
 %% Set Parameters
 
