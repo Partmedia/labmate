@@ -1,4 +1,4 @@
-figure
+% figure
 
 tic
 %% Construct visa object
@@ -177,8 +177,8 @@ data_o = [freq_f;mag_fordered;phs_fordered]';
 
 plot(freq_f,mag_fordered);
 hold on
-yyaxis right
-plot(freq_f,phs_fordered);
+% yyaxis right
+% plot(freq_f,phs_fordered);
 
 
 %% Save data
