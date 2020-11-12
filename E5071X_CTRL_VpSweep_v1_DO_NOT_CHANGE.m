@@ -45,37 +45,9 @@ hold on
 % plot(freq_f,phs_fordered);
 
 %% Save data
-lo_file_number_temp = 0;
-
-while(true)
-    while(true)
-        num_toinsert = 4-floor(log10(lo_file_number_temp));
-        if(num_toinsert == Inf)
-            lo_file_number = '00000';
-            break;
-        else
-            while(num_toinsert > 0.5 && num_toinsert ~= Inf)
-                num_toinsert = num_toinsert - 1;
-                lo_file_number = strcat('0',lo_file_number);
-            end
-            break;
-        end
-    end
-
-    tosave_file_name = strcat(lo_file_name,lo_file_number);
-    if(isfile(strcat(tosave_file_name,'.mat')) == 0)
-        lo_file_number_temp = str2double(lo_file_number);
-        % Insert '0'
-        
-        num_toinsert = 4-floor(log10(lo_file_number_temp));
-        if(num_toinsert == Inf)
-            lo_file_number = '00000';
-        end
-        save(strcat(lo_file_name,lo_file_number), 'v_target', 'power', 'if_bw', 'freq_f', 'mag_fordered', 'phs_fordered', 'f_lo', 'vpp_lo', 'out_harm');
-        break;
-    else
-        lo_file_number_temp = str2double(lo_file_number);
-        lo_file_number_temp = lo_file_number_temp+1;
-        lo_file_number = num2str(lo_file_number_temp);
-    end
+if (vpp_lo == 0)
+    tosave_file_name = sprintf("T_P%.1f_Vp%.1f.mat", power, v_target);
+else
+    tosave_file_name = sprintf("T_P%.1f_Vp%.1f_MixVpp%.1f_Out%d.mat", power, v_target, vpp_lo, out_harm);
 end
+save(tosave_file_name, 'v_target', 'power', 'if_bw', 'freq_f', 'mag_fordered', 'phs_fordered', 'f_lo', 'vpp_lo', 'out_harm');
