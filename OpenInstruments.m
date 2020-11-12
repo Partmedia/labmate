@@ -9,5 +9,7 @@ end
 
 if ~exist('VNA', 'var')
     VNA = visa('ni', 'GPIB0::16::INSTR');
+    VNA.InputBufferSize = 1601*40;
+    VNA.Timeout = 600;
     fopen(VNA);
 end

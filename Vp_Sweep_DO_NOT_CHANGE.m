@@ -1,8 +1,5 @@
 close all
-clear all
 clc
-
-OpenInstruments
 
 %% Set Parameters
 
@@ -29,8 +26,7 @@ lo_file_name = 'T';
 lo_file_number = '0';
 
 %% DO NOT CHANGE ANYTHING BELOW THIS LINE
-VNA.InputBufferSize = 1601*40;
-VNA.Timeout = 600;
+OpenInstruments
 
 sweep_type = ' LIN'; % sweep type
 file_name = 'test.s2p'; % saved file name
