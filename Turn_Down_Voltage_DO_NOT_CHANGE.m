@@ -2,3 +2,4 @@
 OpenInstruments;
 Set_Voltage(VS_03, 1, 0);
 Set_Voltage(VS_03, 2, 0);
+AFG3102_Setup(lo, 1, 0, 15e6);

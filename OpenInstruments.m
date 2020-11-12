@@ -7,6 +7,11 @@ if ~exist('VS_03', 'var')
     fopen(VS_03); % Voltage Source
 end
 
+if ~exist('lo', 'var')
+    lo = visa('ni','GPIB0::11::INSTR');
+    fopen(lo);
+end
+
 if ~exist('VNA', 'var')
     VNA = visa('ni', 'GPIB0::16::INSTR');
     VNA.InputBufferSize = 1601*40;
