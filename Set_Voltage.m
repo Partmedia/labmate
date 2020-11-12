@@ -3,6 +3,7 @@ v_lim_btm = 0;
 v_lim_up = 15;
 v_step = 0.1;
 v_tolerance = v_step;
+i_lim = 10e-3;
 
 % Limit v_target between (v_limit_btm, v_limit_up)
 v_target = min(v_lim_up, max(v_lim_btm, v_target));
@@ -19,6 +20,7 @@ fprintf(VS_03, set_volt_step);
 % Enable output
 outp_stat = str2double(query(VS_03,'OUTP?'));
 if(outp_stat == 0 && v_target ~= 0)
+    fprintf(VS_03, 'CURR %.3f', i_lim);
     fprintf(VS_03, 'VOLT 0');
     fprintf(VS_03, 'OUTP ON');
 end
