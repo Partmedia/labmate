@@ -1,6 +1,7 @@
 % Tool Name                  GPIB#
-% NG-VS-03                    1
-% NG-NA-03                    16
+% NG-VS-03 (E3649A)            1
+% AFG3102                     11
+% NG-NA-03 (E5071C)           16
 
 if ~exist('VS_03', 'var')
     VS_03 = visa('ni','GPIB0::1::INSTR');
