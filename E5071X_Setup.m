@@ -1,4 +1,4 @@
-function E5071X_Setup(VNA, fc, span, num_point, if_bw, power, stress_chann, sense_chann)
+function E5071X_Setup(VNA, fc, span, num_point, if_bw, power, stress_chann, sense_chann, offset)
 %% Set Sweep Type
 sweep_type = ' LIN'; % sweep type
 set_swe_typ_stress = strcat(':SENS',num2str(stress_chann),':SWE:TYPE',sweep_type);
@@ -45,6 +45,21 @@ set_pw = strcat(':SOUR',num2str(sense_chann),':POW',{' '},num2str(power));
 set_pw_sense = set_pw{1};
 fprintf(VNA, set_pw_stress);
 fprintf(VNA, set_pw_sense);
+
+%% Frequency Offset
+if (offset == 0)
+    fprintf(VNA, ':SENS1:OFFS OFF');
+else
+    % zero source offset
+    cmd = sprintf('SENS1:OFFS:PORT%d:OFFS %f', stress_chann, 0);
+    fprintf(VNA, cmd);
+    
+    % set sense offset
+    cmd = sprintf('SENS1:OFFS:PORT%d:OFFS %f', sense_chann, offset);
+    fprintf(VNA, cmd);
+    
+    fprintf(VNA, ':SENS1:OFFS ON');
+end
 
 %%
 fprintf(VNA, strcat('CALC1:PAR1:DEF S',num2str(sense_chann),num2str(stress_chann)));

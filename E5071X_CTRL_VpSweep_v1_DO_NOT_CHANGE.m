@@ -71,7 +71,7 @@ while(true)
         if(num_toinsert == Inf)
             lo_file_number = '00000';
         end
-        save(strcat(lo_file_name,lo_file_number), 'v_target', 'power', 'if_bw', 'freq_f', 'mag_fordered', 'phs_fordered');
+        save(strcat(lo_file_name,lo_file_number), 'v_target', 'power', 'if_bw', 'freq_f', 'mag_fordered', 'phs_fordered', 'f_lo', 'vpp_lo', 'out_harm');
         break;
     else
         lo_file_number_temp = str2double(lo_file_number);
