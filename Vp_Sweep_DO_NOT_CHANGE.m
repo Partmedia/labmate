@@ -25,6 +25,7 @@ lo_file_number = '0';
 
 %% DO NOT CHANGE ANYTHING BELOW THIS LINE
 OpenInstruments
+Turn_Down_Voltage_DO_NOT_CHANGE
 fprintf(VNA, ':TRIG:SOUR BUS');% Set trigger source to BUS
 
 file_name = 'test.s2p'; % saved file name
