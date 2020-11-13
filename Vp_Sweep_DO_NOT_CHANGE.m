@@ -9,10 +9,7 @@ Vp_step = 2; % Vp step
 Vp_Stop = 7; % Vp Sweeping ending point
 v_port = 1; % Output port number of voltage source
 
-pwr_start = -40;
-pwr_step = 10;
-pwr_stop = -10;
-pwr_levels = [-40, -30, -20, -10, -5];
+pwr_levels = [-20, -10, -5, 0, 5];
 
 % Set VNA parameters
 fc = 0; % center frequency
@@ -48,9 +45,9 @@ for power = pwr_levels
     end
     
     % Mixed measurement
-    v_target = 5;
     f_lo = 15e6;
-    vpp_lo = 1;
+    vpp_lo = 5;
+    for v_target = [3, 5]
     for out_harm = [0, 1]
         fprintf("%.1f dBm @ Vp=%.1f mix %.1f (out %d) ", power, v_target, vpp_lo, out_harm);
         AFG3102_Setup(lo, 1, vpp_lo, f_lo)
@@ -59,6 +56,7 @@ for power = pwr_levels
         E5071X_Setup(VNA, fc, span, num_point, if_bw, power, stress_chann, sense_chann, out_harm * f_lo);
         E5071X_CTRL_VpSweep_v1_DO_NOT_CHANGE;
         fprintf("OK\n");
+    end
     end
     AFG3102_Setup(lo, 1, 0, f_lo)
     toc
