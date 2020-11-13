@@ -64,5 +64,4 @@ end
 %%
 fprintf(VNA, strcat('CALC1:PAR1:DEF S',num2str(sense_chann),num2str(stress_chann)));
 fprintf(VNA, strcat('CALC1:PAR1:SEL'));
-fprintf(VNA, strcat('CALC1:FORM MLOG'));
 end

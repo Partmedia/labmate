@@ -22,6 +22,7 @@ fprintf(VNA, set_snp);
 
 %% Retreive data
 freq_out = query(VNA, ':SENS1:FREQ:DATA?');
+fprintf(VNA, strcat('CALC1:FORM MLOG'));
 mag_out = query(VNA, ':CALC1:DATA:FDAT?');
 fprintf(VNA, strcat('CALC1:FORM PHAS'));
 phs_out =  query(VNA, ':CALC1:DATA:FDAT?');
