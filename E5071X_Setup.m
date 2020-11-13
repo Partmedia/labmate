@@ -7,20 +7,24 @@ fprintf(VNA, set_swe_typ_stress);
 fprintf(VNA, set_swe_typ_sense);
 
 %% Set Center Frequency
+if (fc ~= 0)
 set_center = strcat(':SENS',num2str(stress_chann),':FREQ:CENT',{' '},num2str(fc));
 set_center_stress = set_center{1};
 set_center = strcat(':SENS',num2str(sense_chann),':FREQ:CENT',{' '},num2str(fc));
 set_center_sense = set_center{1};
 fprintf(VNA, set_center_stress);
 fprintf(VNA, set_center_sense);
+end
 
 %% Set Frequency Span
+if (span ~= 0)
 set_span = strcat(':SENS',num2str(stress_chann),':FREQ:SPAN',{' '},num2str(span));
 set_span_stress = set_span{1};
 set_span = strcat(':SENS',num2str(sense_chann),':FREQ:SPAN',{' '},num2str(span));
 set_span_sense = set_span{1};
 fprintf(VNA, set_span_stress);
 fprintf(VNA, set_span_sense);
+end
 
 %% Set Number of Points
 set_point = strcat(':SENS',num2str(stress_chann),':SWE:POIN',{' '},num2str(num_point));

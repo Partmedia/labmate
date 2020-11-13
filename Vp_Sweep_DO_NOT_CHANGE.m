@@ -15,8 +15,8 @@ pwr_stop = -10;
 pwr_levels = [-40, -30, -20, -10, -5];
 
 % Set VNA parameters
-fc = 61.43e6; % center frequency
-span = 100e3; % frequency span
+fc = 0; % center frequency
+span = 0; % frequency span
 num_point = 1601; % number of points
 if_bw = 1e2; % IF BW
 stress_chann = 1; % stimulating channel
