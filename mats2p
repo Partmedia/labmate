@@ -1,0 +1,38 @@
+#!/usr/bin/env python3
+# mats2p -- convert labmate saved measurements to S2P
+from scipy.io import loadmat
+import numpy as np
+import sys
+
+def noext(s):
+    return s.rsplit('.', 1)[0]
+
+def convert(path, f):
+    # labmate stores only S21 magnitude (in dB) and phase (in degrees)
+    data = loadmat(path)
+    freq = data['freq_f']
+    mag = data['mag_fordered']
+    phi = data['phs_fordered']
+    vec = np.vstack([freq, mag, phi]).T
+
+    print("! mats2p output for %s" % path, file=f)
+    print("# Hz S DB R 50", file=f)
+    for v in vec:
+        print("%f 0 0 %f %f 0 0 0 0" % (v[0], v[1], v[2]), file=f)
+
+def main():
+    if len(sys.argv) < 2:
+        print("usage: mat_s2p file ...")
+        return 64
+
+    paths = sys.argv[1:]
+    for path in paths:
+        path_out = noext(path) + ".s2p"
+        try:
+            with open(path_out, 'w+') as f:
+                convert(path, f)
+        except Exception as e:
+            print("failed to convert %s: %s" % (path, str(e)))
+
+if __name__ == '__main__':
+    main()
