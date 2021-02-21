@@ -47,8 +47,8 @@ hold on
 
 %% Save data
 if (vpp_lo == 0)
-    tosave_file_name = sprintf("T_P%.1f_Vp%.1f.mat", power, v_target);
+    tosave_file_name = sprintf("%s_P%.1f_Vp%.1f.mat", lo_file_name, power, v_target);
 else
-    tosave_file_name = sprintf("T_P%.1f_Vp%.1f_MixVpp%.1f_Out%d.mat", power, v_target, vpp_lo, out_harm);
+    tosave_file_name = sprintf("%s_P%.1f_Vp%.1f_MixVpp%.1f_Out%d.mat", lo_file_name, power, v_target, vpp_lo, out_harm);
 end
 save(tosave_file_name, 'v_target', 'power', 'if_bw', 'freq_f', 'mag_fordered', 'phs_fordered', 'f_lo', 'vpp_lo', 'out_harm');
