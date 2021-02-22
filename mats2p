@@ -16,6 +16,17 @@ def convert(path, f):
     vec = np.vstack([freq, mag, phi]).T
 
     print("! mats2p output for %s" % path, file=f)
+
+    # print remaining keys as comments
+    del data['__header__']
+    del data['__version__']
+    del data['__globals__']
+    del data['freq_f']
+    del data['mag_fordered']
+    del data['phs_fordered']
+    for key, val in data.items():
+        print("! %s:%s" % (key, val[0,0]), file=f)
+
     print("# Hz S DB R 50", file=f)
     for v in vec:
         print("%f 0 0 %f %f 0 0 0 0" % (v[0], v[1], v[2]), file=f)
