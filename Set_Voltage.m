@@ -1,7 +1,7 @@
 function Set_Voltage(VS_03, v_port, v_target)
 v_lim_btm = 0;
 v_lim_up = 15;
-v_step = 0.1;
+v_step = 0.2;
 v_tolerance = v_step;
 i_lim = 10e-3;
 
