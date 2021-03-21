@@ -1,4 +1,4 @@
-function E5071X_Setup(VNA, fc, span, num_point, if_bw, power, stress_chann, sense_chann, offset)
+function E5071X_Setup(VNA, fc, span, num_point, if_bw, power, stress_chann, sense_chann, offset, rev)
 %% Set Sweep Type
 sweep_type = ' LIN'; % sweep type
 set_swe_typ_stress = strcat(':SENS',num2str(stress_chann),':SWE:TYPE',sweep_type);
@@ -62,6 +62,19 @@ else
     cmd = sprintf('SENS1:OFFS:PORT%d:OFFS %f', sense_chann, offset);
     fprintf(VNA, cmd);
     
+    fprintf(VNA, ':SENS1:OFFS ON');
+end
+
+%% Reverse Sweep
+if (rev == 1)
+    cmd = sprintf('SENS1:OFFS:PORT%d:STAR %f', stress_chann, fc + span/2);
+    fprintf(VNA, cmd);
+    cmd = sprintf('SENS1:OFFS:PORT%d:STOP %f', stress_chann, fc - span/2);
+    fprintf(VNA, cmd);
+    cmd = sprintf('SENS1:OFFS:PORT%d:STAR %f', sense_chann, fc + span/2);
+    fprintf(VNA, cmd);
+    cmd = sprintf('SENS1:OFFS:PORT%d:STOP %f', sense_chann, fc - span/2);
+    fprintf(VNA, cmd);
     fprintf(VNA, ':SENS1:OFFS ON');
 end
 

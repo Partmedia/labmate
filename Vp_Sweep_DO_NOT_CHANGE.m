@@ -31,13 +31,15 @@ for power = pwr_levels
     f_lo = 0;
     vpp_lo = 0;
     out_harm = 0;
-    E5071X_Setup(VNA, fc, span, num_point, if_bw, power, stress_chann, sense_chann, 0);
+    for rev = [0, 1]
+    E5071X_Setup(VNA, fc, span, num_point, if_bw, power, stress_chann, sense_chann, 0, rev);
     for v_target = vp_sweep
-        fprintf("%.1f dBm @ Vp=%.1f ", power, v_target);
+        fprintf("%.1f dBm @ Vp=%.1f %d ", power, v_target, rev);
         Set_Voltage(vsource, v_port, v_target);
         check_vp(vsource);
         E5071X_CTRL_VpSweep_v1_DO_NOT_CHANGE;
         fprintf("OK\n");
+    end
     end
     
     % Mixed measurement

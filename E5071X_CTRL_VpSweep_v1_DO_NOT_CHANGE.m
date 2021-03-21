@@ -40,6 +40,10 @@ for n = 1:1:numel(mag_fordered)
 end
 
 %% Plot data
+% When doing a reverse sweep, frequency points are reversed
+if (rev == 1)
+    freq_f = flip(freq_f)
+end
 plot(freq_f,mag_fordered);
 hold on
 % yyaxis right
@@ -47,7 +51,7 @@ hold on
 
 %% Save data
 if (vpp_lo == 0)
-    tosave_file_name = sprintf("%s_P%.1f_Vp%.1f.mat", lo_file_name, power, v_target);
+    tosave_file_name = sprintf("%s_P%.1f_Vp%.1f_rev%d.mat", lo_file_name, power, v_target, rev);
 else
     tosave_file_name = sprintf("%s_P%.1f_Vp%.1f_MixVpp%.1f_Out%d.mat", lo_file_name, power, v_target, vpp_lo, out_harm);
 end
