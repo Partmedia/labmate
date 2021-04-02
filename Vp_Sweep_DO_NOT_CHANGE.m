@@ -2,19 +2,19 @@ close all
 clc
 
 %% Set Parameters
-vsource = VS_03;
+vsource = VS_05;
 stress_chann = 1;   % Stimulus channel
-sense_chann = 3;    % Sense channel
+sense_chann = 2;    % Sense channel
 v_port = 1;         % Output port number of voltage source
-vp_sweep = 10;   % Vp sweep range (start:step:stop)
-pwr_levels = [-40]; % Power sweep range (dBm)
+vp_sweep = 0:1:18;  % Vp sweep range (start:step:stop)
+pwr_levels = [-30, -15, -12.5]; % Power sweep range (dBm)
 mix = 0;            % Do mixed measurement
 
 % Set VNA parameters
-fc = 0; % center frequency
-span = 0; % frequency span
+fc = 61.108942e6; % center frequency
+span = 100e3; % frequency span
 num_point = 1601; % number of points
-if_bw = 1e2; % IF BW
+if_bw = 200; % IF BW
 
 % Local file save name
 lo_file_name = input('Device ID? ', 's');
